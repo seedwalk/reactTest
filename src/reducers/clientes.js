@@ -1,19 +1,3 @@
-function returnProduct(id){
-    return {
-        nombre: 'Producto'+id,
-        Descripcion: 'Descripcion '+id,
-    }
-}
-
-function returnProductList() {
-    let productList = [];
-    for (let i = 0; i<16; i++){
-        productList.push(
-            returnProduct(i));
-    }
-    return productList;
-}
-
 const initialState = [{
   	name: 'Jerry',
   	lastName: 'Seinfield',
@@ -34,24 +18,14 @@ const initialState = [{
 
 function clientesReducer(state = initialState, action) {
   switch (action.type) {
-      case 'ADD_PRODUCT': {
-        let productList = state.productList;
-        const nextId = productList.length;
-        const nextProduct = returnProduct(nextId);
-
-        const newState = Object.assign({}, state, {
-            productList: [
-                ...state.productList,
-                nextProduct
-            ]
-        });
-
+      case 'ADD_CLIENT': {
+        const newState = state.slice(0);
+        newState.push(action.payload);
         return newState;
-
       }
       case 'DELETE_CLIENT' : {
         const phoneNumber = action.payload
-        const newState = state.filter((item)=> (item.tel != phoneNumber))
+        const newState = state.filter((item)=> (item.tel !== phoneNumber))
         return newState;   
       }
       default: {

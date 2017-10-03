@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'react';
+import PropTypes from 'prop-types';
 
 class TableList extends Component {
 
@@ -7,7 +7,7 @@ class TableList extends Component {
     headers.unshift('#')
     headers.push('Delete')
     const header = headers.map(( value , index) =>
-        <th>{value}</th>
+        <th key={index}>{value}</th>
     );
     return header
   }
@@ -15,10 +15,10 @@ class TableList extends Component {
 
   buildRows(tableData, headers) {
     const rows = tableData.map(( row , index) => 
-        <tr onClick={()=>this.props.handleRowClick(row)}>
+        <tr key={index} onClick={()=>this.props.handleRowClick(row)}>
             <td>{index}</td>
             {headers.map((header, index) =>
-              <td>{row[header]}</td>
+              <td key={index}>{row[header]}</td>
             )}
             <td><button className="btn btn-default" attr-data={row.tel} onClick={this.props.handleDelete}>Delete</button></td>
         </tr>
@@ -62,7 +62,7 @@ class TableList extends Component {
 
 
 TableList.propTypes = {
-   tableData: PropTypes.object,
+   tableData: PropTypes.array,
    handleRowClick: PropTypes.func,
    handleDelete: PropTypes.func
 }

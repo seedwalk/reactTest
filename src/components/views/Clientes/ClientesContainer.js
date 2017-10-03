@@ -12,6 +12,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = ({
     borrarCliente: clientesActions.borrarCliente,
+    agregarCliente: clientesActions.agregarCliente
 });
 
 const ClientesContainer = connect(mapStateToProps, mapDispatchToProps)(Clientes);
